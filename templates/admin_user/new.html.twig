@@ -1,0 +1,20 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Nouveau client{% endblock %}
+
+{% block body %}
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-user">
+                <div class="card-header">
+                    <h5 class="card-title">Nouveau client <a href="{{ path('app_admin_user_index') }}"><button class="btn-sm btn btn-primary"> retour à la liste</button></a></h5>
+                </div>
+                <div class="card-body">
+                    {{ include('admin_user/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

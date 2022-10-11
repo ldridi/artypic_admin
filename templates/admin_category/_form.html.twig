@@ -1,0 +1,22 @@
+
+
+
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-6 pr-1">
+        <div class="form-group">
+            {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.status, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-12 pr-1">
+        <div class="form-group">
+            <button class="btn btn-primary btn-round">{{ button_label|default('Sauvegarder') }}</button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

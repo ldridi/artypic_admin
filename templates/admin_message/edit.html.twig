@@ -1,0 +1,40 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit Message{% endblock %}
+
+{% block body %}
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-user">
+                <div class="card-header">
+                    <b style="color:#f8796c"> Informations Clientt</b>
+                </div>
+                <div class="card-body">
+                    <ul style="line-height: 2">
+                        <li><u><b>Client : </b></u> {{ message.name }}</li>
+                        <li><u><b>Sujet : </b></u> {{ message.subject.name }}</li>
+                        <li><u><b>Email :</b></u> {{ message.email }}</li>
+                        <li><u><b>Message :</b></u> {{ message.texte }}</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card card-user">
+                <div class="card-header">
+                    <b style="color:#f8796c"> Reponse</b>
+                </div>
+                <div class="card-body">
+                    {{ include('admin_message/_form.html.twig', {'button_label': 'Update'}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <a href="{{ path('app_admin_message_index') }}">back to list</a>
+{% endblock %}

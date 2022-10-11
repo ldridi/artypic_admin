@@ -1,0 +1,64 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Tags index{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des tags ({{ tags|length }}) <a href="{{ path('app_admin_tags_new') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                    <i class="fa fa-plus"></i>
+                                </button></a></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow: hidden !important;">
+                            <table class="table dynamicTable  table-striped table-bordered">
+                                <thead class="text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Titre
+                                </th>
+                                <th>
+                                    status
+                                </th>
+                                <th class="text-right">
+                                    Options
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for tag in tags %}
+                                    <tr>
+                                        <td>
+                                            #{{ tag.id }}
+                                        </td>
+                                        <td>
+                                            {{ tag.name }}
+                                        </td>
+                                        <td>
+                                            {{ tag.status ? '<span class="badge  badge-success">Oui</span>' : '<span class="badge  badge-danger">Non</span>'}}
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="{{ path('app_admin_tags_edit', {'id': tag.id}) }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button></a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

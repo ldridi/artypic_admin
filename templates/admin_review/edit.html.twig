@@ -1,0 +1,24 @@
+
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit review{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title">Modification Avis "{{ review.id}}"  <a href="{{ path('app_admin_review_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                    <i class="fa fa-home"></i>
+                                </button></a></h5>
+                    </div>
+                    <div class="card-body">
+                        {{ include('admin_review/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

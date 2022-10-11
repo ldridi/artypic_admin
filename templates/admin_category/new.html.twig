@@ -1,0 +1,23 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Category{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title">Nouvelle categorie <a href="{{ path('app_admin_category_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                    <i class="fa fa-home"></i>
+                                </button></a></h5>
+                    </div>
+                    <div class="card-body">
+                        {{ include('admin_category/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

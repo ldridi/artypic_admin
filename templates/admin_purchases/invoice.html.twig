@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="ThemeMarch">
+    <!-- Site Title -->
+    <title>General Invoice</title>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ absolute_url(asset('invoice/style.css')) }}">
+    {% endblock %}
+</head>
+
+{% block body %}
+    <body>
+        <div class="cs-container">
+    <div class="cs-invoice cs-style1">
+        <div class="cs-invoice_in" id="download_section">
+            <div class="cs-invoice_head cs-type1 cs-mb25">
+                <div class="cs-invoice_left">
+                    <p class="cs-invoice_number cs-primary_color cs-mb5 cs-f16"><b class="cs-primary_color">Facture No :</b> #{{ tokenPurchase }}</p>
+                    <p class="cs-invoice_date cs-primary_color cs-m0"><b class="cs-primary_color">Date : </b>{{ datePurchase }}</p>
+                </div>
+                <div class="cs-invoice_right cs-text_right">
+                    <div class="cs-logo cs-mb5"><img src="{{ absolute_url(asset('invoice/tecos.png')) }}" alt="Logo"></div>
+                </div>
+            </div>
+            <div class="cs-mb10" style="min-height:150px!important;">
+                <div class="" style="display: inline; float: right;width: 50%;">
+                    <b class="cs-primary_color" style="color:#f8796c!important;">Facturer à:</b>
+                    <p>
+                        <b> {{ nomSurnameUser }} </b><br>
+                        {{ adresseUser }} <br>
+                        {{ cityUser }}, {{ countryUser }} <br>
+                        {{emailUser}}<br>
+                        {{phoneUser}}
+                    </p>
+                </div>
+                <div class="" style=" display: inline;float: left;width: 50%;">
+                    <b class="cs-primary_color" style="color:#f8796c!important;">Payer pour:</b>
+                    <p>
+                        <b> {{ companyName }} </b> <br>
+                        {{ companyAdresse }} <br>
+                        {{ companyCity }}, {{ companyCountry }} <br>
+                        {{companyEmail}}<br>
+                        {{companyPhone}} | {{companyTel}}
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="cs-table cs-style1" style="margin-top: 30px!important;">
+                <div class="cs-round_border">
+                    <div class="cs-table_responsive">
+                        <table style="font-size: 16px;">
+                            <thead>
+                            <tr>
+                                <th class="cs-width_1 cs-semi_bold cs-primary_color cs-focus_bg" >REFERENCE</th>
+                                <th class="cs-width_3 cs-semi_bold cs-primary_color cs-focus_bg">PRODUIT</th>
+                                <th class="cs-width_1 cs-semi_bold cs-primary_color cs-focus_bg">PRIX</th>
+                                <th class="cs-width_1 cs-semi_bold cs-primary_color cs-focus_bg">REMISE</th>
+                                <th class="cs-width_2 cs-semi_bold cs-primary_color cs-focus_bg cs-text_right">TOTAL</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for p in products %}
+                            <tr>
+                                <td class="cs-width_1"  >{{ p.sku }}</td>
+                                <td class="cs-width_3">{{ p.title }}</td>
+                                <td class="cs-width_1">{{ p.price }} €</td>
+                                <td class="cs-width_1" style="color:#f8796c!important;">{% if p.discount > 0 %} {{ p.discount }} % {% else %} - {% endif %}</td>
+                                <td class="cs-width_2 cs-text_right">{{ p.totalRemise }} €</td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cs-invoice_footer cs-border_top">
+                        <div class="cs-left_footer cs-mobile_hide">
+                            <p class="cs-mb0"><b class="cs-primary_color">Additional Information:</b></p>
+                            <p class="cs-m0">At check in you may need to present the credit <br>card used for payment of this ticket.</p>
+                        </div>
+                        <div class="cs-right_footer">
+                            <table>
+                                <tbody>
+                                <tr class="cs-border_left">
+                                    <td class="cs-width_3 cs-semi_bold cs-primary_color cs-focus_bg">TOTAL</td>
+                                    <td class="cs-width_3 cs-semi_bold cs-focus_bg cs-primary_color cs-text_right" >{{ total }} €</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cs-note">
+                <div class="cs-note_left">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M416 221.25V416a48 48 0 01-48 48H144a48 48 0 01-48-48V96a48 48 0 0148-48h98.75a32 32 0 0122.62 9.37l141.26 141.26a32 32 0 019.37 22.62z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/><path d="M256 56v120a32 32 0 0032 32h120M176 288h160M176 368h160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+                </div>
+                <div class="cs-note_right">
+                    <p class="cs-mb0"><b class="cs-primary_color cs-bold">Note:</b></p>
+                    <p class="cs-m0">
+                        Pour toute question concernant cette facture, veuillez contacter
+                        service clientèle au numéro ci-dessous:
+                        Téléphonez au : 0800 046 046 Lun-Ven 08h00 - 21h00
+                        URL: www.apple.com/francestore
+                    </p>
+                    <p class="cs-m0" style="margin-top:10px;">
+                        Merci de votre visite sur Apple Store.
+                        Rendez-vous sur copieprivee.culture.gouv.fr afin d'accéder à une
+                        note d’information sur la rémunération pour copie privée et le
+                        remboursement pour usage professionnel.Apple ne partage pas
+                        forcément les opinions qui y sont exprimées.
+                        Dont éco-participation:0.04EUR
+                    </p>
+                    <p class="cs-m0" style="margin-top:10px;">
+                        Pour plus détails sur la garantie et le service après-vente
+                        veuillez vous reporter aux conditions de vente ci-jointes
+                        http://store.apple.com/Catalog/fr/Images/salespolicies_consumer.html
+                    </p>
+                </div>
+            </div><!-- .cs-note -->
+        </div>
+    </div>
+</div>
+    </body>
+{% endblock %}
+</html>
+
+{% block javascripts %}
+<script src="{{ absolute_url(asset('invoice/jquery.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('invoice/jspdf.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('invoice/html2canvas.min.js')) }}"></script>
+<script src="{{ absolute_url(asset('invoice/main.js')) }}"></script>
+{% endblock %}

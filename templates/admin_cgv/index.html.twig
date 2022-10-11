@@ -1,0 +1,22 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Cgv index{% endblock %}
+
+{% block body %}
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Conditions générales de ventes  <a href="{{ path('app_admin_cgv_show', {'id': cgv.id}) }}" > <button type="button" rel="tooltip" class="btn btn-info  btn-md " data-original-title="" title="">
+                                <i class="fa fa-eye"></i> Presentation
+                            </button></a></h4>
+                </div>
+                <div class="card-body">
+                    {{ include('admin_cgv/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

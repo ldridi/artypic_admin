@@ -1,0 +1,128 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-body">
+
+                        <img src="{{ asset('uploads/'~product.image) }}" alt="..." style="height: 400px; width: 100%">
+                    </div>
+                    <div class="card-footer">
+                        <hr>
+                        <div class="button-container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                                    {{ include('admin_product/_delete_form.html.twig') }}
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                                    <a href="{{ path('app_admin_product_edit', {'id': product.id}) }}"><button class="btn btn-primary">Modifier</button></a>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                                    <a href="{{ path('app_admin_product_index') }}"><button class="btn btn-primary"><i class="fa fa-home"></i></button> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title">Produit #{{ product.id }}: {{  product.title }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <ul>
+                                <li>Titre : {{ product.title }}</li>
+                                <li>Description : {{ product.description }}</li>
+                                <li>date de creation : {{ product.createdAt }}</li>
+                                <li>date de modification : {{ product.updatedAt}} </li>
+                                <li>Prix : </li>
+                                <li>Sku : </li>
+                                <li>Status : {{ product.status ? "<span class='badge badge-success'>Oui</span>" : "<span class='badge badge-danger'>Non</span>"}}</li>
+                                <li>Publié ? : {{ product.enabled ? "<span class='badge badge-success'>Oui</span>" : "<span class='badge badge-danger'>Non</span>"}} </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des avis</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if reviews %}
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th class="text-right">
+                                        ID
+                                    </th>
+                                    <th width="100px" class="text-right">
+                                        Client
+                                    </th>
+                                    <th class="text-right">
+                                        Date
+                                    </th>
+                                    <th class="text-right" width="600px">
+                                        Texte
+                                    </th>
+                                    <th class="text-right">
+                                        Rating
+                                    </th>
+                                    <th class="text-right">
+                                        Publié ?
+                                    </th>
+                                    <th class="text-right">
+                                        Options
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                    {% for review in reviews %}
+                                        <tr>
+                                            <td class="text-right">
+                                                #{{ review.id }}
+                                            </td>
+                                            <td class="text-right">
+                                                <a href="{{ path('app_admin_user_show', {'id': review.user.id}) }}"> {{ review.user.name }} {{ review.user.surname }}</a>
+                                            </td>
+                                            <td class="text-right">
+                                                {{ review.dateReview }}
+                                            </td>
+                                            <td class="text-right">
+                                                {{ review.texte }}
+                                            </td>
+                                            <td class="text-right">
+                                                {{ review.stars }} Etoiles
+                                            </td>
+                                            <td class="text-right">
+                                                {{ review.status ? "<span class='badge badge-success'>Yes</span>" : "<span class='badge badge-danger'>Non</span>"}}
+                                            </td>
+                                            <td class="text-right">
+                                                active
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-warning">Aucun avis pour ce produit</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

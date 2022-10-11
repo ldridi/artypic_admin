@@ -1,0 +1,195 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="card-title"> {{ user.name }} {{ user.surname}}
+
+                <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" ><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                        <i class="fa fa-pencil"></i></button></a>
+                    <a href="{{ path('app_admin_user_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                            <i class="fa fa-home"></i>
+                        </button></a>
+                    {{ include('admin_user/_delete_form.html.twig') }}
+
+
+
+
+                </h4>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <b style="color:#f8796c"> Informations client</b>
+                    </div>
+                    <div class="card-body">
+                        <ul style="line-height: 2">
+                            <li><u><b>Nom & prenom :</b></u> {{ user.surname }} {{ user.name }}</li>
+                            <li><u><b>Entreprise :</b></u> {{ user.company }}</li>
+                            <li><u><b>Telephone :</b></u> {{ user.phone }}</li>
+                            <li><u><b>Username :</b></u> {{ user.nickname }}</li>
+                            <li><u><b>Email :</b></u> {{ user.email }}</li>
+                            <li><u><b>Verifié ? : </b></u> &nbsp;{{ user.isVerified ? "<span class='badge badge-success'>Oui</span>" : "<span class='badge badge-danger'>Non</span>"}}</li>
+                            <li><u><b>Date inscription ? : </b></u>{{ user.dateCreation}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <b style="color:#f8796c"> Information Livraison</b>
+                    </div>
+                    <div class="card-body">
+                        <ul style="line-height: 2">
+                            <li><u><b>Adresse :</b></u> {{ user.adresse }}</li>
+                            <li><u><b>Ville :</b></u> {{ user.city }}</li>
+                            <li><u><b>Code postale :</b></u> {{ user.zipcode }}</li>
+                            <li><u><b>Pays :</b></u> {{ user.country }}</li>
+                            <li><u><b>Telephone :</b></u> {{ user.phone }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <b style="color:#f8796c"> Information Facturation</b>
+                    </div>
+                    <div class="card-body">
+                        <ul style="line-height: 2">
+                            <li><u><b>Adresse :</b></u> {{ user.adressePurchase }}</li>
+                            <li><u><b>Ville :</b></u> {{ user.cityPurchase }}</li>
+                            <li><u><b>Code postale :</b></u> {{ user.zipcodePurchase }}</li>
+                            <li><u><b>Pays :</b></u> {{ user.countryPurchase }}</li>
+                            <li><u><b>Telephone :</b></u> {{ user.phonePurchase }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title" style="color:#f8796c; font-weight: bold">Historique des commandes ({{ purchases|length }})</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow: hidden !important;">
+                            <table class="table dynamicTable table-bordered table-striped" >
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Numero de commande
+                                </th>
+                                <th>
+                                    total
+                                </th>
+                                <th>
+                                    date de commande
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Paiement
+                                </th>
+                                <th>
+                                    Lien
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for purchase in purchases %}
+                                    <tr>
+                                        <td>
+                                            #{{ purchase.id }}
+                                        </td>
+                                        <td>
+                                          <a href="{{ path('app_admin_purchases_show', {'id': purchase.id}) }}" target="_blank" style="color:#2BA3E1!important"> {{ purchase.numero }}</a>
+                                        </td>
+                                        <td>
+                                            {{ purchase.total }}
+                                        </td>
+                                        <td>
+                                            {{ purchase.datePurchase }}
+                                        </td>
+                                        <td>
+                                            {{ purchase.status }}
+                                        </td>
+                                        <td>
+                                            {{ purchase.paiement }}
+                                        </td>
+                                        <td>
+                                            {{ purchase.track }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title" style="color:#f8796c; font-weight: bold">Historique des avis ({{ reviews|length }})</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive " style="overflow: hidden !important;">
+                            <table class="table dynamicTable table-bordered table-striped" >
+                                <thead class=" text-primary">
+                                <th>
+                                    id
+                                </th>
+                                <th style="width: 900px">
+                                    Texte
+                                </th>
+                                <th>
+                                    stars
+                                </th>
+                                <th>
+                                    Produit
+                                </th>
+                                <th>
+                                    Publié ?
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for review in reviews %}
+                                    <tr>
+                                        <td>
+                                            #{{ review.id }}
+                                        </td>
+                                        <td>
+                                            {{ review.texte }}
+                                        </td>
+                                        <td>
+                                            {{ review.stars }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('app_admin_product_show', {'id': review.productId}) }}" target="_blank"> <img src="{{ asset('uploads/'~review.product) }}" style="height: 50px"></a>
+                                        </td>
+                                        <td>
+                                            {{ review.status ? '<span class="badge  badge-success">Oui</span>' : '<span class="badge  badge-danger">Non</span>' }}
+                                        </td>
+                                        <td>
+                                            {{ review.dateAvis }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit Cgu{% endblock %}
+
+{% block body %}
+    <h1>Edit Cgu</h1>
+
+
+
+    <a href="{{ path('app_admin_cgu_index') }}">back to list</a>
+
+    {{ include('admin_cgu/_delete_form.html.twig') }}
+{% endblock %}

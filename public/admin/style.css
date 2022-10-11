@@ -1,0 +1,13 @@
+.btn-info, .btn-primary {
+    border-color: #2BA3E1;
+    background-color: #2BA3E1!important;
+    color: #FFFFFF;
+}
+.sorting_disabled{
+    color: #2BA3E1!important;
+}
+
+.pagination .page-item.active>.page-link, .pagination .page-item.active>.page-link:focus, .pagination .page-item.active>.page-link:hover{
+    background-color: #2BA3E1!important;
+    border-color: #2BA3E1!important;
+}

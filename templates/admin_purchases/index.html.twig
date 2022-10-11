@@ -1,0 +1,99 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Liste des commandes {% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des commandes ({{ purchases|length }}) </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow: hidden !important;">
+                            <table class="table dynamicTable  table-striped table-bordered">
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th style="width: 100px">
+                                    Numero de commande
+                                </th>
+                                <th>
+                                    Client
+                                </th>
+                                <th>
+                                    Total
+                                </th>
+                                <th style="width: 100px">
+                                    Date de commande
+                                </th>
+                                <th style="width: 100px">
+                                    Paiement
+                                </th>
+                                <th style="width: 100px">
+                                    Status
+                                </th>
+                                <th style="width: 300px">
+                                    Lien
+                                </th>
+                                <th style="width: 300px">
+                                    Note
+                                </th>
+                                <th class="text-right">
+                                    Option
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for purchase in purchases %}
+                                    <tr>
+                                        <td style="{% if purchase.isConsulted == 0 %} background: #F8796C {% else %} background:#B4DFC0 {% endif %}">
+                                            #{{ purchase.id }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('app_admin_purchases_show', {'id': purchase.id}) }}" target="_blank" style="color:#2BA3E1;"> {{ purchase.tokenPurchase }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('app_admin_user_show', {'id': purchase.user.id}) }}" target="_blank" style="color:#2BA3E1;"> {{ purchase.user.name }} {{ purchase.user.surname }}</a>
+                                        </td>
+                                        <td>
+                                            {{ purchase.total }} €
+                                        </td>
+                                        <td>
+                                            {{ purchase.datePurchase }}
+                                        </td>
+                                        <td>
+                                            {{ purchase.paiementStatus }}
+                                        </td>
+                                        <td>
+                                            {{ purchase.status }}
+                                        </td>
+                                        <td>
+                                            {{ purchase.trackLink }}
+                                        </td>
+                                        <td>
+                                            {{ purchase.note }}
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="{{ path('app_admin_purchases_show', {'id': purchase.id}) }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-eye"></i>
+                                                </button></a>
+                                            <a href="{{ path('app_admin_purchases_edit', {'id': purchase.id}) }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button></a>
+                                            <a href="{{ path('generate_invoice', {'token': purchase.id}) }}" target="_blank"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                </button></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

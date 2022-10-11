@@ -1,0 +1,23 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Modification de la commande {{ purchase.tokenPurchase }}{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <h5 class="card-title">Modification de la commande "{{ purchase.tokenPurchase}}"  <a href="{{ path('app_admin_purchases_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                    <i class="fa fa-home"></i>
+                                </button></a></h5>
+                    </div>
+                    <div class="card-body">
+                        {{ include('admin_purchases/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

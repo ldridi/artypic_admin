@@ -1,0 +1,89 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.companyName, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.companyEmail, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.companyAdresse, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.companyZipcode, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.companyCity, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.companyCountry, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.companyPhone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.companyTel, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-12 pr-3">
+        {{ form_row(form.image, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="col-md-12 pr-3" style="margin-top:20px;">
+        <h4 style="color:#EF857D">Horraires d'ouverture</h4>
+    </div>
+
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.dayFrom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.dayTo, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.hourFrom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.hourTo, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.dayClosed, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6 pr-3">
+        <div class="form-group">
+            {{ form_row(form.hourClosed, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-12 pr-3">
+        <hr>
+        <div class="form-group">
+            <button class="btn btn-primary btn-round">{{ button_label|default('Save') }}</button>
+        </div>
+    </div>
+</div>
+
+
+{{ form_end(form) }}

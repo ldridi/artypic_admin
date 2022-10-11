@@ -1,0 +1,81 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des avis ({{ reviews|length}}) </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive " style="overflow: hidden !important;">
+                            <table class="table dynamicTable table-bordered table-striped" >
+                                <thead class=" text-primary">
+                                <th>
+                                    id
+                                </th>
+                                <th style="width: 600px">
+                                    Texte
+                                </th>
+                                <th>
+                                    Etoiles
+                                </th>
+                                <th>
+                                    Produit
+                                </th>
+                                <th>
+                                    Client
+                                </th>
+                                <th>
+                                    Publié ?
+                                </th>
+                                <th>
+                                    Date de publication
+                                </th>
+                                <th class="text-right">
+                                    Options
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for review in reviews %}
+                                    <tr>
+                                        <td>
+                                            #{{ review.id }}
+                                        </td>
+                                        <td>
+                                            {{ review.texte }}
+                                        </td>
+                                        <td>
+                                            {{ review.stars }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('app_admin_product_show', {'id': review.product.id}) }}" target="_blank"> <img src="{{ asset('uploads/'~review.product.image) }}" style="height: 50px"></a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('app_admin_user_show', {'id': review.user.id}) }}" target="_blank" style="color:#2BA3E1;"> {{ review.user.name }} {{ review.user.surname }}</a>
+                                        </td>
+                                        <td>
+                                            {{ review.status ? '<span class="badge  badge-success">Oui</span>' : '<span class="badge  badge-danger">Non</span>' }}
+                                        </td>
+                                        <td>
+                                            {{ review.dateReview }}
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="{{ path('app_admin_review_edit', {'id': review.id}) }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

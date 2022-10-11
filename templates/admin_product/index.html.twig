@@ -1,0 +1,89 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des produits ({{ products|length }})&nbsp;<a href="{{ path('app_admin_product_new') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                    <i class="fa fa-plus"></i>
+                                </button></a></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow: hidden !important;">
+                            <table class="table dynamicTable  table-striped table-bordered">
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Titre
+                                </th>
+                                <th>
+                                    date de creation
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Prix
+                                </th>
+                                <th>
+                                    Sku
+                                </th>
+                                <th>
+                                    Remise
+                                </th>
+                                <th>
+                                    Tag
+                                </th>
+                                <th>
+                                    Categorie
+                                </th>
+                                <th>
+                                    Active ?
+                                </th>
+                                <th class="text-right">
+                                    Options
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for product in products %}
+                                    <tr>
+                                        <td>#{{ product.id }}</td>
+                                        <td><img src="{{ asset('uploads/'~product.image) }}" style="height: 50px"></td>
+                                        <td>{{ product.title }}</td>
+                                        <td>{{ product.createdAt }}</td>
+                                        <td>{{ product.status ? "<span class='badge badge-success'>Oui</span>" : "<span class='badge badge-danger'>Non</span>"}}</td>
+                                        <td>{{ product.price }} €</td>
+                                        <td>{{ product.sku }}</td>
+                                        <td>{{ product.discount }} %</td>
+                                        <td><a href="{{ path('app_admin_tags_show', {'id': product.tags.id}) }}" target="_blank"> <span class='badge badge-danger'>{{ product.tags.name }}</span></a></td>
+                                        <td><a href="{{ path('app_admin_category_show', {'id': product.category.id}) }}" target="_blank"><span class='badge badge-danger'>{{ product.category.name }} </span></a></td>
+                                        <td>{{ product.enabled ? "<span class='badge badge-success'>Oui</span>" : "<span class='badge badge-danger'>Non</span>"}}</td>
+                                        <td class="text-right">
+                                            <a href="{{ path('app_admin_product_show', {'id': product.id}) }}">
+                                                <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-eye"></i>
+                                                </button></a>
+                                            <a href="{{ path('app_admin_product_edit', {'id': product.id}) }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

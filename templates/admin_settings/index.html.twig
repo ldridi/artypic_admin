@@ -1,0 +1,67 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>IsVerified</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Company</th>
+                <th>Country</th>
+                <th>Adresse</th>
+                <th>City</th>
+                <th>Zipcode</th>
+                <th>Phone</th>
+                <th>Nickname</th>
+                <th>AdressePurchase</th>
+                <th>CityPurchase</th>
+                <th>ZipcodePurchase</th>
+                <th>CountryPurchase</th>
+                <th>PhonePurchase</th>
+                <th>DateCreation</th>
+                <th>CodeToken</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.company }}</td>
+                <td>{{ user.country }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.city }}</td>
+                <td>{{ user.zipcode }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.nickname }}</td>
+                <td>{{ user.adressePurchase }}</td>
+                <td>{{ user.cityPurchase }}</td>
+                <td>{{ user.zipcodePurchase }}</td>
+                <td>{{ user.countryPurchase }}</td>
+                <td>{{ user.phonePurchase }}</td>
+                <td>{{ user.dateCreation }}</td>
+                <td>{{ user.codeToken }}</td>
+                <td>
+                    <a href="{{ path('app_admin_settings_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_admin_settings_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_settings_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Commande {{ purchase.tokenPurchase }}{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="card-title"> Commande numéro : {{ purchase.tokenPurchase }} <a href="{{ path('app_admin_purchases_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                            <i class="fa fa-home"></i>
+                        </button></a></h4>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <b style="color:#f8796c"> Informations Commande</b>
+                    </div>
+                    <div class="card-body">
+                        <ul style="line-height: 2">
+                            <li><u><b>Total :</b></u> {{ purchase.total}} €</li>
+                            <li><u><b>Date de commande :</b></u> {{ purchase.datePurchase }}</li>
+                            <li><u><b>Numero de commande :</b></u> {{ purchase.tokenPurchase }}</li>
+                            <li><u><b>Status de paiement :</b></u> {{ purchase.paiementStatus }}</li>
+                            <li><u><b>Status de livraison :</b></u> {{ purchase.status }}</li>
+                            <li style="color:forestgreen"><u><a href="{{ path('generate_invoice', {'token': purchase.id}) }}" target="_blank"> <b><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Generer la facture</b></a></u> </li>
+                            <li style="color:forestgreen" ><u><b><i class="fa fa-paper-plane" aria-hidden="true"></i> <span class="sendInvoiceByEmail" data-invoice="{{ purchase.id }}">Envoyer la facture par email</span></b></u> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <b style="color:#f8796c"> Information Livraison</b>
+                    </div>
+                    <div class="card-body">
+                        <ul style="line-height: 2">
+                            <li><u><b>Nom & prenom :</b></u> {{ purchase.user.surname }} {{ purchase.user.name }}</li>
+                            <li><u><b>Entreprise :</b></u> {{ purchase.user.company }}</li>
+                            <li><u><b>Telephone :</b></u> {{ purchase.user.phone }}</li>
+                            <li><u><b>Email :</b></u> {{ purchase.user.email }}</li>
+                            <li><u><b>Adresse :</b></u> {{ purchase.user.adresse }}</li>
+                            <li><u><b>Ville :</b></u> {{ purchase.user.city }}</li>
+                            <li><u><b>Code postale :</b></u> {{ purchase.user.zipcode }}</li>
+                            <li><u><b>Pays :</b></u> {{ purchase.user.country }}</li>
+                            <li><u><b>Telephone :</b></u> {{ purchase.user.phone }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="card-header">
+                        <b style="color:#f8796c"> Information Facturation</b>
+                    </div>
+                    <div class="card-body">
+                        <ul style="line-height: 2">
+                            <li><u><b>Nom & prenom :</b></u> {{ purchase.user.surname }} {{ purchase.user.name }}</li>
+                            <li><u><b>Entreprise :</b></u> {{ purchase.user.company }}</li>
+                            <li><u><b>Telephone :</b></u> {{ purchase.user.phone }}</li>
+                            <li><u><b>Email :</b></u> {{ purchase.user.email }}</li>
+                            <li><u><b>Adresse :</b></u> {{ purchase.user.adressePurchase }}</li>
+                            <li><u><b>Ville :</b></u> {{ purchase.user.cityPurchase }}</li>
+                            <li><u><b>Code postale :</b></u> {{ purchase.user.zipcodePurchase }}</li>
+                            <li><u><b>Pays :</b></u> {{ purchase.user.countryPurchase }}</li>
+                            <li><u><b>Telephone :</b></u> {{ purchase.user.phonePurchase }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des produits </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow: hidden !important;">
+                            <table class="table dynamicTable  table-striped table-bordered">
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Titre
+                                </th>
+                                <th>
+                                    date de creation
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Prix
+                                </th>
+                                <th>
+                                    Sku
+                                </th>
+                                <th>
+                                    Active ?
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for product in products %}
+                                    <tr>
+                                        <td>#{{ product.id }}</td>
+                                        <td><img src="{{ asset('uploads/'~product.image) }}" style="height: 50px"></td>
+                                        <td>{{ product.title }}</td>
+                                        <td>{{ product.createdAt }}</td>
+                                        <td>{{ product.status ? 'Yes' : 'No' }}</td>
+                                        <td>{{ product.price }}</td>
+                                        <td>{{ product.sku }}</td>
+                                        <td>{{ product.enabled ? 'Yes' : 'No' }}</td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

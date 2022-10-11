@@ -1,0 +1,69 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}SocialNework index{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des reseaux sociaux ({{ social_neworks|length }}) <a href="{{ path('app_admin_social_network_new') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                    <i class="fa fa-plus"></i>
+                                </button></a></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow: hidden !important;">
+                            <table class="table dynamicTable  table-striped table-bordered">
+                                <thead class="text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Titre
+                                </th>
+                                <th>
+                                   Icone
+                                </th>
+                                <th>
+                                    URL
+                                </th>
+                                <th class="text-right">
+                                    Options
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for social_nework in social_neworks %}
+                                    <tr>
+                                        <td>
+                                            #{{ social_nework.id }}
+                                        </td>
+                                        <td>
+                                            {{ social_nework.name }}
+                                        </td>
+                                        <td>
+                                            {{ social_nework.icon }}
+                                        </td>
+                                        <td>
+                                           {% if social_nework.url%} {{ social_nework.url }} {% else %} - {% endif %}
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="{{ path('app_admin_social_network_edit', {'id': social_nework.id}) }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button></a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

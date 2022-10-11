@@ -1,0 +1,82 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des clients ({{ users|length }})</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow: hidden !important;">
+                            <table class="table dynamicTable  table-striped table-bordered">
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Nom & Prenom
+                                </th>
+                                <th>
+                                    Adresse
+                                </th>
+                                <th>
+                                    Date d'inscription
+                                </th>
+                                <th>
+                                    Verifié ?
+                                </th>
+                                <th class="text-right">
+                                    Options
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>
+                                        #{{ user.id }}
+                                    </td>
+                                    <td>
+                                        {{ user.email }}
+                                    </td>
+                                    <td>
+                                        {{ user.name }} {{ user.surname }}
+                                    </td>
+                                    <td>
+                                        {{ user.adresse }} {{ user.zipcode }} {{ user.city }} {{ user.country }}
+                                    </td>
+                                    <td>
+                                        {{ user.dateCreation }}
+                                    </td>
+                                    <td>
+                                        {{ user.isVerified ? '<span class="badge  badge-success">Oui</span>' : '<span class="badge  badge-danger">Non</span>' }}
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="{{ path('app_admin_user_show', {'id': user.id}) }}"> <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                <i class="fa fa-eye"></i>
+                                            </button></a>
+                                        <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                <i class="fa fa-pencil"></i>
+                                            </button></a>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

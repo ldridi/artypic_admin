@@ -1,0 +1,38 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Message{% endblock %}
+
+{% block body %}
+    <h1>Message</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ message.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ message.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ message.email }}</td>
+            </tr>
+            <tr>
+                <th>Texte</th>
+                <td>{{ message.texte }}</td>
+            </tr>
+            <tr>
+                <th>ResponseToContact</th>
+                <td>{{ message.responseToContact }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_message_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_message_edit', {'id': message.id}) }}">edit</a>
+
+    {{ include('admin_message/_delete_form.html.twig') }}
+{% endblock %}

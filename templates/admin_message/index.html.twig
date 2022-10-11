@@ -1,0 +1,87 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Message index{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> Liste des messages ({{ messages|length }}) </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow: hidden !important;">
+                            <table class="table dynamicTable  table-striped table-bordered">
+                                <thead class=" text-primary">
+                                <th style="width: 50px; ">
+                                    ID
+                                </th>
+                                <th style="width: 100px">
+                                    Client
+                                </th>
+                                <th style="width: 100px">
+                                    Email
+                                </th>
+                                <th style="width: 100px">
+                                    Sujet
+                                </th>
+                                <th style="width: 300px">
+                                    Demande
+                                </th>
+                                <th style="width: 100px">
+                                    Date reception
+                                </th>
+                                <th style="width: 300px">
+                                    Reponse
+                                </th>
+                                <th style="width: 100px">
+                                    Date reponse
+                                </th>
+                                <th class="text-right">
+                                    Option
+                                </th>
+                                </thead>
+                                <tbody>
+                                {% for message in messages %}
+                                    <tr>
+                                        <td style="{% if message.statut == 0 %} background: #F8796C {% else %} background:#B4DFC0 {% endif %}">
+                                            #{{ message.id }}
+                                        </td>
+                                        <td>
+                                            {{ message.name }}
+                                        </td>
+                                        <td>
+                                            {{ message.email }}
+                                        </td>
+                                        <td>
+                                            {{ message.subject.name }}
+                                        </td>
+                                        <td>
+                                            {{ message.texte }}
+                                        </td>
+                                        <td>
+                                            {{ message.dateContact }}
+                                        </td>
+                                        <td>
+                                            {{ message.responseToContact|raw }}
+                                        </td>
+                                        <td>
+                                            {{ message.dateReponse }}
+                                        </td>
+                                        <td class="text-right" style="width: 100px">
+                                            <a href="{{ path('app_admin_message_edit', {'id': message.id}) }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

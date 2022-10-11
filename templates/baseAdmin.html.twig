@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <!-- CSS Files -->
+        <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('admin/assets/css/paper-dashboard1.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('admin/assets/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="{{ asset('admin/assets/demo/demo.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <link href="{{ asset('admin/style.css') }}" rel="stylesheet" />
+        <style>
+            .off-canvas-sidebar .nav li>a, .sidebar .nav li>a {
+                margin: 10px 15px 0;
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                position: relative;
+                text-transform: uppercase;
+                cursor: pointer;
+                font-size: 12px;
+                padding: 10px 8px;
+                line-height: 30px;
+                opacity: .7;
+            }
+        </style>
+    {% endblock %}
+</head>
+<body>
+
+<div class="wrapper ">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+        <div class="logo">
+            <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+                <div class="logo-image-small">
+                    <img src="../assets/img/logo-small.png">
+                </div>
+                <!-- <p>CT</p> -->
+            </a>
+            <a href="https://www.creative-tim.com" class="simple-text logo-normal">
+                Artypic
+                <!-- <div class="logo-image-big">
+                  <img src="../assets/img/logo-big.png">
+                </div> -->
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="active ">
+                    <a href="{{ path('dashboard') }}">
+                        <i class="fa fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_admin_user_index') }}">
+                        <i class="fa fa-user"></i>
+                        <p>Clients</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_admin_product_index') }}">
+                        <i class="fa fa-shopping-bag"></i>
+                        <p>Boutique</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_admin_purchases_index') }}">
+                        <i class="fa fa-shopping-cart"></i>
+                        <p>Commandes</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_admin_review_index') }}">
+                        <i class="fa fa-commenting-o"></i>
+                        <p>Avis</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_admin_message_index') }}">
+                        <i class="fa fa-envelope-o"></i>
+                        <p>Messagerie</p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#config">
+                        <i class="fa fa-cog"></i>
+                        <p>
+                            Parametres <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse " id="config">
+                        <ul class="nav">
+                            <li>
+                                <a href="{{ path('app_admin_category_index') }}">
+                                    <span class="sidebar-normal"> Categories </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_tags_index') }}">
+                                    <span class="sidebar-normal"> Tags </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_promo_code_index') }}">
+                                    <span class="sidebar-normal"> Code promo </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_social_network_index') }}">
+                                    <span class="sidebar-normal"> Reseau social </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_product_index') }}">
+                                    <span class="sidebar-normal"> Menu </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_product_index') }}">
+                                    <span class="sidebar-normal"> Sujet contact </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#pagesConfig">
+                        <i class="fa fa-book"></i>
+                        <p>
+                            Pages <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse " id="pagesConfig">
+                        <ul class="nav">
+                            <li>
+                                <a href="{{ path('app_admin_product_index') }}">
+                                    <span class="sidebar-normal"> A propos </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_product_index') }}">
+                                    <span class="sidebar-normal"> Contact </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_product_index') }}">
+                                    <span class="sidebar-normal"> Peinture </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_product_index') }}">
+                                    <span class="sidebar-normal"> Direction artistique </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_cgu_index', {'id' : 1}) }}">
+                                    <span class="sidebar-normal"> CGU </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_product_index') }}">
+                                    <span class="sidebar-normal"> CGV </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel" style="min-height: 100vh;">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <a class="navbar-brand" href="javascript:;">Administration <a href="{{ path('app_admin_settings_edit') }}"><button type="button" rel="tooltip" class="btn btn-info btn-md " data-original-title="" title="">
+                                <i class="fa fa-cog"></i> Configurations
+                            </button></a>
+                        <button type="button" rel="tooltip" class="btn btn-info btn-md " data-original-title="" title="">
+                            <i class="fa fa-bell"></i> Commandes ( <span id="numberPurchase"></span> )
+                        </button>
+                        <button type="button" rel="tooltip" class="btn btn-info btn-md " data-original-title="" title="">
+                            <i class="fa fa-bell"></i> Messages
+                        </button>
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+            </div>
+        </nav>
+{% block body %}{% endblock %}
+    </div>
+</div>
+
+</body>
+</html>
+
+{% block javascripts %}
+    <script src="{{ asset('admin/assets/js/core/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <script src="{{ asset('admin/assets/js/plugins/chartjs.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/plugins/bootstrap-notify.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
+    <script src="{{ asset('admin/assets/demo/demo.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/jquery-3.5.1.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+            demo.initChartsPages();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.dynamicTable').DataTable({
+                "ordering": false,
+                "language": {
+                    "lengthMenu": "Afficher _MENU_ enregistrement par page",
+                    "zeroRecords": "Pas d'enregistrement",
+                    "info": "Voir page _PAGE_ sur _PAGES_",
+                    "infoEmpty": "Pas d'enregistrement",
+                    "infoFiltered": "(filtré à partir de _MAX_ enregistrements au total)",
+                    "search" : "Rechercher",
+                    "paginate": {
+                        "previous": "Precedent",
+                        "next": "Suivant"
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(function(){
+            $('.sendInvoiceByEmail').click(function(){
+                var tokenInvoice = $(this).data('invoice');
+                console.log(tokenInvoice);
+                $.ajax({
+                    url: Routing.generate('send_invoice'),
+                    method: 'POST',
+                    data : {
+                        tokenInvoice : tokenInvoice
+                    },
+                    success: function (result) {
+                        Toastify({
+                            text: "Facture envoyée par email",
+                            duration: 5000,
+                            newWindow: true,
+                            close: true,
+                            gravity: "top", // `top` or `bottom`
+                            position: "center", // `left`, `center` or `right`
+                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                                background: "linear-gradient(to right, #98D8CA, #98D8CA)",
+                                color: "black"
+                            },
+                            onClick: function(){} // Callback after click
+                        }).showToast();
+                    }
+                });
+            })
+        })
+    </script>
+
+    <script>
+        $(function(){
+            $.ajax({
+                url: Routing.generate('dashboard_notifications'),
+                method: 'GET',
+                success: function (result) {
+                    $('#numberPurchase').html(result)
+                }
+            });
+        })
+    </script>
+{% endblock %}
