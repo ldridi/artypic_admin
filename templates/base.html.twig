@@ -6,14 +6,80 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+
+            <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+            <meta name="viewport" content="width=device-width" />
+
+            <link href="{{ asset('adminNew/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+            <link href="{{ asset('adminNew/css/paper-dashboard.css') }}" rel="stylesheet" />
+
+            <link href="{{ asset('adminNew/css/demo.css') }}" rel="stylesheet" />
+
+            <link href="{{ asset('adminNew/css/font-awesome.min.css') }}" rel="stylesheet">
+            <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+            <link href="{{ asset('adminNew/css/themify-icons.css') }}" rel="stylesheet">
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+
     </head>
     <body>
         {% block body %}{% endblock %}
     </body>
 </html>
+
+
+{% block javascripts %}
+
+    <script src="{{ asset('adminNew/js/jquery-ui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('adminNew/js/perfect-scrollbar.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('adminNew/js/bootstrap.min.js') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('adminNew/js/jquery.validate.min.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/es6-promise-auto.min.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/moment.min.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/bootstrap-datetimepicker.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/bootstrap-selectpicker.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/bootstrap-switch-tags.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/jquery.easypiechart.min.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/chartist.min.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/bootstrap-notify.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/sweetalert2.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/jquery-jvectormap.js') }}"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFPQibxeDaLIUHsC6_KqDdFaUdhrbhZ3M"></script>
+
+    <script src="{{ asset('adminNew/js/jquery.bootstrap.wizard.min.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/bootstrap-table.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/jquery.datatables.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/fullcalendar.min.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/paper-dashboard.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/jquery.sharrre.js') }}"></script>
+
+    <script src="{{ asset('adminNew/js/demo.js') }}"></script>
+    <script type="text/javascript">
+        $().ready(function(){
+            demo.checkFullPageBackgroundImage();
+
+            setTimeout(function(){
+                // after 1000 ms we add the class animated to the login/register card
+                $('.card').removeClass('card-hidden');
+            }, 700)
+        });
+    </script>
+{% endblock %}
