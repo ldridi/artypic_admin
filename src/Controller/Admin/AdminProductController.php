@@ -37,6 +37,9 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $journalName = strtolower(preg_replace('/\s+/', '-', $product->getTitle()));
+            $product->setSlug(random_int(100, 1001).'-'.$journalName);
+            $product->setDiscount('');
             $file = $product->getImage();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('uploads'), $fileName);
@@ -69,6 +72,9 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $journalName = strtolower(preg_replace('/\s+/', '-', $product->getTitle()));
+            $product->setSlug(random_int(100, 1001).'-'.$journalName);
+            $product->setDiscount('');
             $file = $product->getImage();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('uploads'), $fileName);
