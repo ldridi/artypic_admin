@@ -6,7 +6,7 @@
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="card-title"> Commande numéro : {{ purchase.tokenPurchase }} <a href="{{ path('app_admin_purchases_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                <h4 class="card-title" style="color:#EF857D; font-weight: bold"> Commande numéro : {{ purchase.tokenPurchase }} <a href="{{ path('app_admin_purchases_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
                             <i class="fa fa-home"></i>
                         </button></a></h4>
             </div>
@@ -71,7 +71,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"> Liste des produits </h4>
+                        <h4 class="card-title" style="color:#EF857D; font-weight: bold"> Liste des produits </h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" style="overflow: hidden !important;">
@@ -106,13 +106,13 @@
                                 {% for product in products %}
                                     <tr>
                                         <td>#{{ product.id }}</td>
-                                        <td><img src="{{ asset('uploads/'~product.image) }}" style="height: 50px"></td>
+                                        <td><img src="{{ asset('uploads/'~product.image) }}" style="height: 50px" alt="{{ product.title }}"></td>
                                         <td>{{ product.title }}</td>
                                         <td>{{ product.createdAt }}</td>
-                                        <td>{{ product.status ? 'Yes' : 'No' }}</td>
+                                        <td>{{ product.status ? "<span class='badge badge-success'>Oui</span>" : "<span class='badge badge-danger'>Non</span>"}}</td>
                                         <td>{{ product.price }}</td>
                                         <td>{{ product.sku }}</td>
-                                        <td>{{ product.enabled ? 'Yes' : 'No' }}</td>
+                                        <td>{{ product.enabled ? "<span class='badge badge-success'>Oui</span>" : "<span class='badge badge-danger'>Non</span>"}}</td>
                                     </tr>
 
                                 {% endfor %}

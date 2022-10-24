@@ -27,7 +27,7 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, unique: true)]
+    #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
@@ -61,7 +61,6 @@ class Product
     private ?bool $enabled = null;
 
     /**
-     * @Assert\NotBlank(message="Please, upload the photo.")
      * @Assert\File(mimeTypes={ "image/png", "image/jpeg" , "image/webp"})
      */
     #[ORM\Column(length: 255, nullable: true)]

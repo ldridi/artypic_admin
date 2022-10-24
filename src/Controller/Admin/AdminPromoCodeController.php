@@ -18,7 +18,7 @@ class AdminPromoCodeController extends AbstractController
     public function index(PromoCodeRepository $promoCodeRepository): Response
     {
         return $this->render('admin_promo_code/index.html.twig', [
-            'promo_codes' => $promoCodeRepository->findAll(),
+            'promo_codes' => $promoCodeRepository->findBy(array(), array("id" => "DESC"))
         ]);
     }
 

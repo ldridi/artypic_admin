@@ -23,7 +23,7 @@ class AdminPurchasesController extends AbstractController
     public function index(PurchaseRepository $purchaseRepository): Response
     {
         return $this->render('admin_purchases/index.html.twig', [
-            'purchases' => $purchaseRepository->findAll(),
+            'purchases' => $purchaseRepository->findBy(array(), array("id" => "DESC"))
         ]);
     }
 

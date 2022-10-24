@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="ThemeMarch">
     <!-- Site Title -->
-    <title>General Invoice</title>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ absolute_url(asset('invoice/style.css')) }}">
     {% endblock %}
@@ -25,7 +25,7 @@
                     <p class="cs-invoice_date cs-primary_color cs-m0"><b class="cs-primary_color">Date : </b>{{ datePurchase }}</p>
                 </div>
                 <div class="cs-invoice_right cs-text_right">
-                    <div class="cs-logo cs-mb5"><img src="{{ absolute_url(asset('invoice/tecos.png')) }}" alt="Logo"></div>
+                    <div class="cs-logo cs-mb5"><img src="{{ absolute_url(asset('uploads/'~companyImage)) }}" alt="Logo" style="width: 100px;height: 100px;"></div>
                 </div>
             </div>
             <div class="cs-mb10" style="min-height:150px!important;">

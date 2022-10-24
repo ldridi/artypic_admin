@@ -13,7 +13,7 @@ class PromoCodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('coupon')
+            ->add('coupon',TextType::class)
             ->add('expirationDate')
             ->add('amount', TextType::class)
         ;

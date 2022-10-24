@@ -6,6 +6,7 @@ use App\Entity\Admin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -274,7 +275,8 @@ class User1Type extends AbstractType
             ->add('hourTo',TextType::class,['required'   => false,'label' => 'A'])
             ->add('dayClosed',TextType::class,['required'   => false,'label' => 'Fermeture'])
             ->add('hourClosed',TextType::class,['required'   => false,'label' => 'Heures fermeture'])
-            ->add('image', FileType::class, array('data_class' => null, 'label' => 'Photo (png, jpeg)','required' => true))
+            ->add('image', FileType::class, array('data_class' => null, 'label' => 'Photo (png, jpeg)','required' => false))
+            ->add('imageHidden', HiddenType::class, array("mapped" => false,'required' => false))
         ;
     }
 

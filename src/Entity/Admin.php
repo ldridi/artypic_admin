@@ -75,8 +75,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $hourClosed = null;
 
     /**
-     * @Assert\NotBlank(message="Please, upload the photo.")
-     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" , "image/webp"})
+     * @Assert\File(mimeTypes={ "image/*"})
      */
     #[ORM\Column(length: 255, nullable: true)]
     private $image = null;
@@ -119,6 +118,16 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
     }
 
     /**

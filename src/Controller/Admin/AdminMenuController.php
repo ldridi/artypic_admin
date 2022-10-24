@@ -17,7 +17,7 @@ class AdminMenuController extends AbstractController
     public function index(MenuRepository $menuRepository): Response
     {
         return $this->render('admin_menu/index.html.twig', [
-            'menus' => $menuRepository->findAll(),
+            'menus' => $menuRepository->findBy(array(), array("id" => "DESC"))
         ]);
     }
 

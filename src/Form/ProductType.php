@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,13 +16,14 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('image', FileType::class, array('data_class' => null, 'label' => 'Photo (png, jpeg)','required' => true))
+            ->add('image', FileType::class, array('data_class' => null, 'label' => 'Photo (png, jpeg)','required' => false))
             ->add('description')
             ->add('price')
             ->add('sku')
             ->add('enabled')
             ->add('category')
             ->add('tags')
+            ->add('imageHiddenProduct', TextType::class, array("mapped" => false,'required' => false))
         ;
     }
 

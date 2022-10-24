@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Purchase;
 use App\Entity\PurchaseHistory;
 use App\Entity\User;
@@ -27,7 +28,7 @@ class AdminPurchaseGenerateController extends AbstractController
      * @Route("/generateInvoice/{token}", name="generate_invoice")
      */
     public function generateInvoice($token, EntityManagerInterface $manager, Pdf $pdf){
-        $admin = $this->manager->getRepository(User::class)->find(1);
+        $admin = $this->manager->getRepository(Admin::class)->find($this->getUser());
         $purchase = $manager->getRepository(Purchase::class)->find($token);
         $purchaseHistory = $manager->getRepository(PurchaseHistory::class)->findBy(['purchase' => $token]);
         $purchaseHistoryWithData = [];
@@ -58,10 +59,11 @@ class AdminPurchaseGenerateController extends AbstractController
             'phoneUser' => $purchase->getUser()->getPhone(),
             'emailUser' => $purchase->getUser()->getEmail(),
 
+            'companyImage' => $admin->getImage(),
             'companyName' => $admin->getCompanyName(),
             'companyEmail' => $admin->getCompanyEmail(),
             'companyAdresse' => $admin->getCompanyAdresse(),
-            'companyCity' => $admin->getZipcode().' , '.$admin->getCity(),
+            'companyCity' => $admin->getCompanyZipcode().' , '.$admin->getCompanyCity(),
             'companyCountry' => $admin->getCompanyCountry(),
             'companyPhone' => $admin->getCompanyPhone(),
             'companyTel' => $admin->getCompanyTel(),
@@ -93,7 +95,7 @@ class AdminPurchaseGenerateController extends AbstractController
      * @Route("/sendInvoice", name="send_invoice", options={"expose"=true})
      */
     public function sendInvoice(Request $request, EntityManagerInterface $manager, Pdf $pdf){
-        $admin = $this->manager->getRepository(User::class)->find(1);
+        $admin = $this->manager->getRepository(Admin::class)->find($this->getUser());
         $token = $request->request->get('tokenInvoice');
         $purchase = $manager->getRepository(Purchase::class)->find($token);
         $purchaseHistory = $manager->getRepository(PurchaseHistory::class)->findBy(['purchase' => $token]);
@@ -124,11 +126,11 @@ class AdminPurchaseGenerateController extends AbstractController
             'countryUser' => $purchase->getUser()->getCountry(),
             'phoneUser' => $purchase->getUser()->getPhone(),
             'emailUser' => $purchase->getUser()->getEmail(),
-
+            'companyImage' => $admin->getImage(),
             'companyName' => $admin->getCompanyName(),
             'companyEmail' => $admin->getCompanyEmail(),
             'companyAdresse' => $admin->getCompanyAdresse(),
-            'companyCity' => $admin->getZipcode().' , '.$admin->getCity(),
+            'companyCity' => $admin->getCompanyZipcode().' , '.$admin->getCompanyCity(),
             'companyCountry' => $admin->getCompanyCountry(),
             'companyPhone' => $admin->getCompanyPhone(),
             'companyTel' => $admin->getCompanyTel(),

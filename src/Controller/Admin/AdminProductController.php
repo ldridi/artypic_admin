@@ -9,6 +9,7 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,7 @@ class AdminProductController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         return $this->render('admin_product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $productRepository->findBy(array(), array("id" => "DESC"))
         ]);
     }
 
@@ -40,10 +41,16 @@ class AdminProductController extends AbstractController
             $journalName = strtolower(preg_replace('/\s+/', '-', $product->getTitle()));
             $product->setSlug(random_int(100, 1001).'-'.$journalName);
             $product->setDiscount('');
+
             $file = $product->getImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('uploads'), $fileName);
-            $product->setImage($fileName);
+            if ($file instanceof UploadedFile) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('uploads'), $fileName);
+                $product->setImage($fileName);
+            }else{
+                $product->setImage("error.png");
+            }
+
             $productRepository->add($product, true);
 
             return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);
@@ -69,16 +76,25 @@ class AdminProductController extends AbstractController
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {
         $form = $this->createForm(ProductType::class, $product);
+        $form->get('imageHiddenProduct')->setData($product->getImage());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $journalName = strtolower(preg_replace('/\s+/', '-', $product->getTitle()));
             $product->setSlug(random_int(100, 1001).'-'.$journalName);
             $product->setDiscount('');
+
             $file = $product->getImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('uploads'), $fileName);
-            $product->setImage($fileName);
+            if ($file instanceof UploadedFile) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('uploads'), $fileName);
+                $product->setImage($fileName);
+            }else{
+                $username = $form->get('imageHiddenProduct')->getData();
+                $product->setImage($username);
+            }
+
+
             $productRepository->add($product, true);
 
             return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);

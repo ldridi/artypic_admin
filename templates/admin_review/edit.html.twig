@@ -1,7 +1,7 @@
 
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Edit review{% endblock %}
+{% block title %}Modification review{% endblock %}
 
 {% block body %}
 
@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <div class="card card-user">
                     <div class="card-header">
-                        <h5 class="card-title">Modification Avis "{{ review.id}}"  <a href="{{ path('app_admin_review_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
+                        <h5 class="card-title" style="color:#EF857D; font-weight: bold">Modification Avis "{{ review.id}}"  <a href="{{ path('app_admin_review_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-icon btn-md " data-original-title="" title="">
                                     <i class="fa fa-home"></i>
                                 </button></a></h5>
                     </div>

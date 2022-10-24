@@ -6,7 +6,9 @@ use \Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Admin;
 use App\Form\User1Type;
 use App\Repository\UserRepository;
+use PHPUnit\TextUI\XmlConfiguration\File;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,36 +19,8 @@ class AdminSettingsController extends AbstractController
     #[Route('/', name: 'app_admin_settings_index', methods: ['GET'])]
     public function index(UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
-        $admin = $entityManager->getRepository(Admin::class)->find(1);
+        $admin = $this->getUser();
         return $this->render('admin_settings/index.html.twig', [
-            'admin' => $admin,
-        ]);
-    }
-
-    #[Route('/new', name: 'app_admin_settings_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = new Admin();
-        $form = $this->createForm(User1Type::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_admin_settings_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('admin_settings/new.html.twig', [
-            'admin' => $user,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/show', name: 'app_admin_settings_show', methods: ['GET'])]
-    public function show(): Response
-    {
-        return $this->render('admin_settings/show.html.twig', [
             'admin' => $this->getUser(),
         ]);
     }
@@ -54,17 +28,24 @@ class AdminSettingsController extends AbstractController
     #[Route('/edit', name: 'app_admin_settings_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $admin = $entityManager->getRepository(Admin::class)->find(1);
+        $admin = $entityManager->getRepository(Admin::class)->find($this->getUser());
 
         $form = $this->createForm(User1Type::class,$admin);
-
+        $form->get('imageHidden')->setData($admin->getImage());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $file = $admin->getImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('uploads'), $fileName);
-            $admin->setImage($fileName);
+            if ($file instanceof UploadedFile) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('uploads'), $fileName);
+                $admin->setImage($fileName);
+            }else{
+                $username = $form->get('imageHidden')->getData();
+                $admin->setImage($username);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_settings_edit', [], Response::HTTP_SEE_OTHER);
@@ -72,18 +53,8 @@ class AdminSettingsController extends AbstractController
 
         return $this->renderForm('admin_settings/edit.html.twig', [
             'admin' => $admin,
+            'image' => $admin->getImage(),
             'form' => $form,
         ]);
-    }
-
-    #[Route('/{id}', name: 'app_admin_settings_delete', methods: ['POST'])]
-    public function delete(Request $request, Admin $user, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_admin_settings_index', [], Response::HTTP_SEE_OTHER);
     }
 }

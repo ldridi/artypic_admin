@@ -44,11 +44,11 @@
                 </div>
                 <!-- <p>CT</p> -->
             </a>
-            <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-                Artypic
-                <!-- <div class="logo-image-big">
-                  <img src="../assets/img/logo-big.png">
-                </div> -->
+            <a href="{{ path('app_logout') }}" class="simple-text logo-normal">
+                Artypic {% if app.user %}&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out"></i>{% endif %}
+{#               <div class="logo-image-big" style="background: red; ">#}
+{#                  <img src="https://api.free-work.com/media/cache/resolve/company_picture_image_large/picture-NFpwjs6AKtALSavM.png">#}
+{#                </div>#}
             </a>
         </div>
         <div class="sidebar-wrapper">
@@ -109,6 +109,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ path('app_admin_dimensions_index') }}">
+                                    <span class="sidebar-normal"> Dimensions </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ path('app_admin_promo_code_index') }}">
                                     <span class="sidebar-normal"> Code promo </span>
                                 </a>
@@ -119,12 +124,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('app_admin_product_index') }}">
-                                    <span class="sidebar-normal"> Menu </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ path('app_admin_product_index') }}">
+                                <a href="{{ path('app_admin_subject_message_index') }}">
                                     <span class="sidebar-normal"> Sujet contact </span>
                                 </a>
                             </li>
@@ -141,22 +141,22 @@
                     <div class="collapse " id="pagesConfig">
                         <ul class="nav">
                             <li>
-                                <a href="{{ path('app_admin_product_index') }}">
+                                <a href="#">
                                     <span class="sidebar-normal"> A propos </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('app_admin_product_index') }}">
+                                <a href="#">
                                     <span class="sidebar-normal"> Contact </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('app_admin_product_index') }}">
+                                <a href="#">
                                     <span class="sidebar-normal"> Peinture </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('app_admin_product_index') }}">
+                                <a href="#">
                                     <span class="sidebar-normal"> Direction artistique </span>
                                 </a>
                             </li>
@@ -166,8 +166,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('app_admin_product_index') }}">
+                                <a href="{{ path('app_admin_cgv_index', {'id' : 1}) }}">
                                     <span class="sidebar-normal"> CGV </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_faq_index') }}">
+                                    <span class="sidebar-normal"> FAQ </span>
                                 </a>
                             </li>
                         </ul>
@@ -191,13 +196,14 @@
                     <a class="navbar-brand" href="javascript:;">Administration <a href="{{ path('app_admin_settings_edit') }}"><button type="button" rel="tooltip" class="btn btn-info btn-md " data-original-title="" title="">
                                 <i class="fa fa-cog"></i> Configurations
                             </button></a>
-                        <button type="button" rel="tooltip" class="btn btn-info btn-md " data-original-title="" title="">
-                            <i class="fa fa-bell"></i> Commandes ( <span id="numberPurchase"></span> )
-                        </button>
-                        <button type="button" rel="tooltip" class="btn btn-info btn-md " data-original-title="" title="">
-                            <i class="fa fa-bell"></i> Messages
-                        </button>
+                        <a href="{{ path('app_admin_purchases_index') }}"><button  type="button" rel="tooltip" class="btn btn-info btn-md " data-original-title="" title="">
+                            <i class="fa fa-shopping-bag"></i> Commandes ( <span id="numberPurchase"></span> )
+                        </button></a>
+                        <a href="{{ path('app_admin_message_index') }}"><button type="button" rel="tooltip" class="btn btn-info btn-md " data-original-title="" title="">
+                            <i class="fa fa-envelope-o"></i> Messages ( <span id="numberMessage"></span> )
+                            </button></a>
                     </a>
+
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -294,6 +300,16 @@
                 method: 'GET',
                 success: function (result) {
                     $('#numberPurchase').html(result)
+                }
+            });
+        })
+
+        $(function(){
+            $.ajax({
+                url: Routing.generate('dashboard_message_notifications'),
+                method: 'GET',
+                success: function (result) {
+                    $('#numberMessage').html(result)
                 }
             });
         })

@@ -14,15 +14,15 @@ class PurchasesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('status', ChoiceType::class,["attr" => ["class" => "select2-basic"], 'label' => 'Pays', 'choices' => [
-                "En Attente"=>"En Attente",
+            ->add('status', ChoiceType::class,["attr" => ["class" => "select2-basic"], 'label' => 'Statut Livraison', 'choices' => [
+                "En attente de validation"=>"En attente de validation",
                 "Expedié"=>"Expedié",
                 "Livré"=>"Livré",
 
             ]])
-            ->add('paiementStatus', ChoiceType::class,["attr" => ["class" => "select2-basic"], 'label' => 'Pays', 'choices' => [
-                "En Attente"=>"En Attente",
-                "unpaid"=>"unpaid",
+            ->add('paiementStatus', ChoiceType::class,["attr" => ["class" => "select2-basic"], 'label' => 'Statut Paiement', 'choices' => [
+                "En attente de paiement"=>"En attente de paiement",
+                "impayé"=>"unpaid",
                 "payé"=>"payé"
 
             ]])

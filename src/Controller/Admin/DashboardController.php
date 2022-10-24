@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Cgu;
 use App\Entity\CguCgv;
+use App\Entity\Message;
 use App\Entity\Product;
 use App\Entity\Purchase;
 use App\Entity\Review;
@@ -30,14 +31,23 @@ class DashboardController extends AbstractController
         $produits = $this->manager->getRepository(Product::class)->findAll();
         $purchases = $this->manager->getRepository(Purchase::class)->findAll();
         $reviews = $this->manager->getRepository(Review::class)->findAll();
-        return $this->render("dashboard/index.html.twig", ['countClient' => count($clients),'countProduits' => count($produits),'countPurchases' => count($purchases),'countReviews' => count($reviews)]);
+        return $this->render("dashboard/index.html.twig", ['clients' => $clients,'produits' => $produits,'purchases' => $purchases,'reviews' => $reviews]);
     }
 
     /**
      * @Route("/dashboard/notifications", name="dashboard_notifications", options={"expose"=true})
      */
-    public function sendInvoice(Request $request, EntityManagerInterface $manager){
+    public function purchaseNotifications(Request $request, EntityManagerInterface $manager){
         $purchaseCount = count($manager->getRepository(Purchase::class)->findBy(['consulted' => 0]));
         return new JsonResponse($purchaseCount);
     }
+
+    /**
+     * @Route("/dashboard/message/notifications", name="dashboard_message_notifications", options={"expose"=true})
+     */
+    public function messageNotification(Request $request, EntityManagerInterface $manager){
+        $messageCount = count($manager->getRepository(Message::class)->findBy(['statut' => 0]));
+        return new JsonResponse($messageCount);
+    }
+
 }

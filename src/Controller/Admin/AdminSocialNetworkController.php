@@ -17,7 +17,7 @@ class AdminSocialNetworkController extends AbstractController
     public function index(SocialNeworkRepository $socialNeworkRepository): Response
     {
         return $this->render('admin_social_network/index.html.twig', [
-            'social_neworks' => $socialNeworkRepository->findAll(),
+            'social_neworks' => $socialNeworkRepository->findBy(array(), array("id" => "DESC"))
         ]);
     }
 

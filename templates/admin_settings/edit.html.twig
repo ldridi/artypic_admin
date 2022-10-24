@@ -1,30 +1,26 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modification User{% endblock %}
 
 {% block body %}
 
 <div class="content">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card card-user">
-                <div class="image">
-                    <img src="{{ asset('uploads/'~admin.image) }}" alt="...">
-                </div>
+
                 <div class="card-body">
-                    <div class="author">
-                        <a href="#">
-                            <img class="avatar border-gray" src="{{ asset('uploads/'~admin.image) }}" alt="...">
-                            <h5 class="title">{{ admin.companyName }}</h5>
-                        </a>
-                    </div>
+                    <a href="#">
+                        <img class=" border-gray img-responsive center-block" src="{{ asset('uploads/'~admin.image) }}" alt="..." style="">
+                        <h5 class="title text-center" style="margin-top:50px;color:#F2877D;">{{ admin.companyName|upper }}</h5>
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card card-user">
                 <div class="card-header">
-                    <h5 class="card-title" style="color:#EF857D">Compte administrateur</h5>
+                    <h5 class="card-title" style="color:#EF857D; font-weight: bold">Compte administrateur</h5>
                 </div>
                 <div class="card-body">
                     {{ include('admin_settings/_form.html.twig', {'button_label': 'Sauvegarder'}) }}

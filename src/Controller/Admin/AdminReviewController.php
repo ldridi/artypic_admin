@@ -18,7 +18,7 @@ class AdminReviewController extends AbstractController
     public function index(ReviewRepository $reviewRepository): Response
     {
         return $this->render('admin_review/index.html.twig', [
-            'reviews' => $reviewRepository->findAll(),
+            'reviews' => $reviewRepository->findBy(array(), array("id" => "DESC"))
         ]);
     }
 
